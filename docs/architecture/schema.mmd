@@ -1,0 +1,60 @@
+---
+config:
+  fontFamily: Arial, Helvetica, sans-serif
+  themeVariables:
+    fontFamily: Arial, Helvetica, sans-serif
+---
+
+erDiagram
+    USER {
+        int user_id PK
+        string username
+        string email
+        string password_hash
+        date created_date
+    }
+
+    STRETCH {
+        int stretch_id PK
+        string name
+        string target_muscle_group
+        float target_angle
+    }
+
+    PROGRAM {
+        int program_id PK
+        int user_id FK
+        string name
+        int target_frequency
+    }
+
+    PROGRAM_STRETCH {
+        int program_id PK,FK
+        int stretch_id PK,FK
+        int order_number
+        float target_angle
+    }
+
+    SESSION {
+        int session_id PK
+        int user_id FK
+        int program_id FK
+        date session_date
+        time start_time
+        time end_time
+    }
+
+    MEASUREMENT {
+        int measurement_id PK
+        int session_id FK
+        int stretch_id FK
+        float achieved_angle
+    }
+
+    USER ||..o{ PROGRAM : creates
+    USER ||..o{ SESSION : completes
+    PROGRAM ||--o{ PROGRAM_STRETCH : contains
+    STRETCH ||--o{ PROGRAM_STRETCH : included_in
+    PROGRAM ||..o{ SESSION : followed_in
+    SESSION ||..o{ MEASUREMENT : records
+    STRETCH ||..o{ MEASUREMENT : measured_in
