@@ -20,7 +20,7 @@ export default function Dashboard() {
       <section style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginTop: '40px' }}>
         <div style={{ background: '#847e93', padding: '20px', borderRadius: '8px', border: '1px solid #262647' }}>
         <h3> Today's Goal</h3>
-        <p>Complete 2 guided mobility stretches to keep your streak alive.</p>
+        <p>Complete 2 guided mobility stretches to keep your streak alive!</p>
         <button style={{ marginTop: '10px', padding: '10px 20px', background: '#000', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
           Start Session
           </button>
