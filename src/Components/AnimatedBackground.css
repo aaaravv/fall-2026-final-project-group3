@@ -11,6 +11,13 @@
 }
 
 
+.blob {
+    position: absolute;
+    filter: blur(45px); /* Soft organic glow */
+    opacity: 0.6;
+    transition: transform 0.1s ease-out;
+}
+
 /*  floating colors */
 .blue-shape {
   width: 40px;
