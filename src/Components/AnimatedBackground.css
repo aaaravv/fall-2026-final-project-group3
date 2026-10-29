@@ -1,0 +1,48 @@
+/* base blue container */
+.animated-bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #161745; /* blue background */
+    overflow: hidden;
+    z-index: -1; /* behind all text */
+    pointer-events: none; /* allow clicks to pass through */
+}
+
+/* Animated background blobs */
+.blob {
+    position: absolute;
+    filter: blur(20px); 
+    opacity: 0.8;
+    transition: transform 0.1s ease-out;
+}
+
+/*  Floating colors */
+.blue-shape {
+  width: 320px;
+  height: 450px;
+  background-color: #446293;
+  top: 7%;
+  left: 20%;
+  border-radius: 50% 50% 60% 40% / 40% 60% 40% 60%;
+}
+
+.purple-shape {
+  width: 280px;
+  height: 350px;
+  background-color: #3f3163;
+  bottom: 10%;
+  right: 15%;
+  border-radius: 40% 60% 70% 30% / 50% 50% 30% 70%;
+}
+
+.green-shape {
+  width: 250px;
+  height: 380px;
+  background-color: #335f5f;
+  top: 15%;
+  left: 12%;
+  border-radius: 50% 50% 60% 40% / 40% 60% 40% 60%;
+}
