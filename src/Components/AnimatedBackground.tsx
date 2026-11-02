@@ -30,13 +30,24 @@ export const AnimatedBackground: React.FC  = () => {
         let animationFrameId: number;
         let angle = 0;
 
+        // Store initial positions of each blob for reference in animation calculations
+        const blobData = Array.from(blobs).map((blob) => {
+            const rect = blob.getBoundingClientRect();
+            return {
+                element: blob,
+                initialX: rect.left + rect.width / 2,
+                initialY: rect.top + rect.height / 2,
+            };
+        });
+
+        // Animation loop for blob movement
         const animate = () => {
             mouseX += (targetX - mouseX) * 0.5;
             mouseY += (targetY - mouseY) * 0.5;
             angle += 0.015;
 
             blobs.forEach((blob, index) => {
-                const speed = (index + 1) * 0.5;
+                const speed = (index + 1) * 0.05;
 
                 // Circular floating path
                 const baseOffsetX = Math.cos(angle + speed + index) * 30;
@@ -55,7 +66,7 @@ export const AnimatedBackground: React.FC  = () => {
                 // Apply wind effect based on cursor proximity
                 let windX = 0;
                 let windY = 0;
-                const maxDistance = 250; // Maximum distance for cursor interaction effect
+                const maxDistance = 200; // Maximum distance for cursor interaction effect
 
                 // Apply wind effect only if the cursor is within the maximum distance
                 if(distance < maxDistance) {
@@ -87,6 +98,12 @@ export const AnimatedBackground: React.FC  = () => {
             <div className="blob blue-shape"></div>
             <div className="blob purple-shape"></div>
             <div className="blob green-shape"></div>
+            <div className="blob green-shape2"></div>
+            <div className="blob blue-shape2"></div>
+            <div className="blob purple-shape2"></div>
+            <div className="blob bottomRight-shape"></div>  
+            <div className="blob topLeft-shape"></div>
+            <div className="blob bottomLeft-shape"></div>
         </div>
     )
 };
