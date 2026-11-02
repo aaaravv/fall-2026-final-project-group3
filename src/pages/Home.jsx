@@ -1,3 +1,7 @@
 import { Link } from 'react-router-dom'
 
-<Link to="/clubs">View Clubs</Link>
+function Home() {
+  return <Link to="/clubs">View Clubs</Link>
+}
+
+export default Home

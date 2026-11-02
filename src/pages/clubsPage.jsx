@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { clubs } from '../data/clubsData'
-import ClubPasswordModal from '../Components/ClubPasswordModal'
+import ClubPasswordModal from '../Components/clubPasswordModal'
 
 function ClubsPage() {
   const [selectedClub, setSelectedClub] = useState(null)
