@@ -1,14 +1,18 @@
-import { Leaderboard } from './Components/Leaderboard'
+import { useState } from 'react'
+import { AnimatedBackground } from './Components/AnimatedBackground'
+import { OnboardingFlow } from './Components/OnboardingFlow'
 import './App.css'
 
-function App() {  // app component that renders the Leaderboard component
+function App() {
+  const [count, setCount] = useState(0)
+
   return (
     <>
-      <main className="app">
-        <Leaderboard />
-      </main>
-    </>
-  )
+      {/* Background and Signin/up */}
+      <AnimatedBackground />
+      <OnboardingFlow />
+    </> 
+  );
 }
 
 export default App
