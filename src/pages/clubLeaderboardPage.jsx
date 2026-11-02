@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom'
-import { clubs } from '../data/ClubsData'
+import { clubs } from '../data/clubsData'
 import { Leaderboard } from '../Components/Leaderboard'
 
 function ClubLeaderboardPage() {    // club leaderboard page component that renders Leaderboard component for a specific club
