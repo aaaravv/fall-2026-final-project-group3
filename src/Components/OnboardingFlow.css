@@ -45,7 +45,7 @@
     gap: 15px;
 }
 
-.oauth-btn, .submit-btn {
+.submit-btn {
     width: 100%;
     padding: 12px;
     border-radius: 10px;
@@ -56,14 +56,31 @@
     transition: transform 0.1s ease, background 0.2s ease;
 }
 
-.oauth-btn {
-    background: #ffffff;
-    color: #0f172a;
+.google-button-container {
+    display: flex;
+    justify-content: center;
+    min-height: 40px;
 }
 
-.oauth-btn:hover {
-    background: #f1f5f9;
-    transform: translateY(-1px);
+.google-button-container.is-loading iframe {
+    pointer-events: none;
+}
+
+.google-button-container.is-loading {
+    opacity: 0.6;
+}
+
+.auth-status, .auth-error {
+    font-size: 0.9rem;
+    margin: 12px 0 0;
+}
+
+.auth-status {
+    color: #cbd5e1;
+}
+
+.auth-error {
+    color: #fca5a5;
 }
 
 .input-group {
