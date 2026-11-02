@@ -4,10 +4,19 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import { AnimatedBackground } from './Components/AnimatedBackground'
 import './App.css'
+import ProfilePage from './pages/ProfilePage'
 
 function App() {
   const [count, setCount] = useState(0)
 
+    if (window.location.pathname === '/profile') {
+    return (
+      <>
+        <AnimatedBackground />
+        <ProfilePage />
+      </>
+    )
+  }
   return (
     <>
       {/* Animated background */}
