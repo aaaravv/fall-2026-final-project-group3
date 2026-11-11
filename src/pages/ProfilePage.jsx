@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import './ProfilePage.css'
 
 const demoPrograms = [
@@ -57,6 +58,12 @@ function ProfilePage() {
 
   return (
     <main className="profile-page">
+
+      {/* Back Arrow to Home */}
+      <Link to="/home" className="home-nav-arrow left-arrow" aria-label="Go to Home">
+        ←
+      </Link>
+
       <header className="profile-heading">
         <p className="profile-brand">StretchMaster</p>
         <h1>My profile</h1>
