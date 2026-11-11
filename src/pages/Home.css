@@ -1,0 +1,85 @@
+.home-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  max-width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  padding: 20px 60px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden; /* Stops any unwanted side-to-side scrolling */
+}
+
+/* Sidebars for lessons and progress */
+.home-sidebar {
+  width: 260px;
+  height: 75vh;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+/* Center camera placeholder zone */
+.home-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+  margin: 0 20px;
+  z-index: 2;
+  min-width: 0; /* Prevents flex items from overflowing horizontally */
+}
+
+.camera-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #111;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+}
+
+/* Navigation Arrow Buttons */
+.home-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.8rem;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 12px 16px;
+  border-radius: 50%;
+  text-decoration: none;
+  color: #333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: background 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+}
+
+.home-nav-arrow:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.left-arrow {
+  left: 15px;
+}
+
+.right-arrow {
+  right: 15px;
+}
+
+.placeholder-box {
+  margin-top: 15px;
+  color: #666;
+  font-size: 0.9rem;
+}
