@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import CameraFeed from '../Components/CameraFeed'
 import './Home.css'
 
 function Home() {
@@ -20,8 +21,7 @@ function Home() {
       {/* Center Column, camera implementation */}
       <section className="home-center">
         <div className="camera-placeholder"> 
-          {/* camera implementation hook here */}
-          <p> Camera feed container</p>
+          <CameraFeed />
         </div>
       </section>
 
