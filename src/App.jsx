@@ -1,6 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AnimatedBackground } from './Components/AnimatedBackground'
-import { OnboardingFlow } from './Components/OnboardingFlow'
+import { OnboardingFlow } from './pages/OnboardingFlow'
 import './App.css'
 import ClubLeaderboardPage from './pages/clubLeaderboardPage'
 import ClubsPage from './pages/clubsPage'
