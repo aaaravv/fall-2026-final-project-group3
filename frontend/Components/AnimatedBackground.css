@@ -1,0 +1,103 @@
+/* base blue container */
+.animated-bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #161745; /* blue background */
+    overflow: hidden;
+    z-index: -1; /* behind all text */
+    pointer-events: none; /* allow clicks to pass through */
+}
+
+/* Animated background blobs */
+.blob {
+    position: absolute;
+    filter: blur(20px); 
+    opacity: 0.8;
+    transition: transform 0.1s ease-out;
+}
+
+/*  Floating colors */
+.blue-shape {
+  width: 170px;
+  height: 250px;
+  background-color: #63b7b0;
+  top: 7%;
+  left: 60%;
+  border-radius: 50% 50% 60% 40% / 40% 60% 40% 60%;
+}
+
+.purple-shape {
+  width: 280px;
+  height: 250px;
+  background-color: #4c0a66;
+  bottom: 10%;
+  right: 5%;
+  border-radius: 40% 60% 70% 30% / 50% 50% 30% 70%;
+}
+
+.green-shape {
+  width: 250px;
+  height: 180px;
+  background-color: #335f5f;
+  top: 15%;
+  left: 20%;
+  border-radius: 50% 50% 60% 40% / 40% 60% 40% 60%;
+}
+
+.green-shape2 {
+  width: 200px;
+  height: 150px;
+  background-color: #17552d;
+  bottom: 5%;
+  left: 30%;
+  border-radius: 50% 50% 60% 40% / 40% 60% 40% 60%;
+}
+
+.blue-shape2 {
+  width: 150px;
+  height: 200px;
+  background-color: #283277;
+  top: 20%;
+  right: 10%;
+  border-radius: 50% 50% 60% 40% / 40% 60% 40% 60%;
+}
+
+.purple-shape2 {
+  width: 180px;
+  height: 180px;
+  background-color: #a5a1f4;
+  top: 38%;
+  left: 5%;
+  border-radius: 50% 50% 60% 40% / 40% 60% 40% 60%;
+}
+
+.bottomRight-shape {
+  width: 100px;
+  height: 100px;
+  background-color: #d182c4; /* example color */
+  bottom: 1%;
+  right: 1%;
+  border-radius: 50% 50% 60% 40% / 40% 60% 40% 60%;
+}
+
+.topLeft-shape {
+  width: 140px;
+  height: 90px;
+  background-color: #45805b; /* example color */
+  top: 0%;
+  left: 1%;
+  border-radius: 50% 50% 60% 40% / 40% 60% 40% 60%;
+}
+
+.bottomLeft-shape {
+  width: 130px;
+  height: 170px;
+  background-color: #ae57ce; /* example color */
+  bottom: .1%;
+  left: 6%;
+  border-radius: 50% 50% 60% 40% / 40% 60% 40% 60%;
+}
+
