@@ -8,6 +8,7 @@ import { Pool } from 'pg';
 import { resolve } from 'node:path';
 import type { Request } from 'express';
 import type { Database } from './database.types.js';
+import progressRouter from './progressHandler.js';  // for pogressHandler.ts
 
 const backendRoot = resolve(import.meta.dirname, '..');
 const projectRoot = resolve(backendRoot, '..');
@@ -46,6 +47,7 @@ const db = new Kysely<Database>({
 const app = express();
 app.use(cors({ origin: frontendOrigin, credentials: true }));
 app.use(express.json({ limit: '10kb' }));
+app.use('/api/progress', progressRouter);   // for pogressHandler.ts
 
 function getSessionToken(request: Request): string | null {
     const cookieHeader = request.headers.cookie;
