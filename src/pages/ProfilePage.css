@@ -404,3 +404,60 @@
     transform: none;
   }
 }
+
+.profile-milestone-intro {
+  margin: 0 0 16px;
+  color: #d9ddf3;
+  font-size: 14px;
+}
+
+.profile-milestone-summary {
+  margin-bottom: 16px;
+}
+
+.profile-milestone-summary > strong {
+  color: #4338ca;
+}
+
+.profile-milestone-summary p {
+  margin: 8px 0 0;
+}
+
+.profile-exercises .profile-milestone-requirements {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.profile-milestone-requirements li {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e9e9f2;
+}
+
+.profile-milestone-requirements li:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.profile-milestone-requirements li > div {
+  min-width: 0;
+}
+
+.profile-milestone-requirements strong {
+  display: block;
+  color: #202442;
+  font-size: 14px;
+}
+
+.profile-milestone-requirements p {
+  margin: 4px 0 0;
+  font-size: 14px;
+}
+
+.profile-milestone-requirements .profile-badge {
+  flex-shrink: 0;
+}

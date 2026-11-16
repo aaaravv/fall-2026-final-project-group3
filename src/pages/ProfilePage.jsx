@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './ProfilePage.css'
+import StretchMilestones from '../Components/StretchMilestones'
 
 const demoPrograms = [
   {
@@ -303,6 +304,7 @@ function ProfilePage() {
           </div>
         )}
       </section>
+      <StretchMilestones showDemo={showDemo} />
     </main>
   )
 }
