@@ -26,8 +26,25 @@ const demoPrograms = [
 function ProfilePage() {
   const [showDemo, setShowDemo] = useState(true)
   const [filter, setFilter] = useState('all')
+  const [weeklyTargets, setWeeklyTargets] = useState({})
 
-  const programs = showDemo ? demoPrograms : []
+  const programs = showDemo
+    ? demoPrograms.map((program) => ({
+        ...program,
+        weeklyTarget: weeklyTargets[program.id] ?? program.weeklyTarget,
+      }))
+    : []
+
+  function updateWeeklyTarget(programId, value) {
+    const target = Number(value)
+
+    if (!Number.isInteger(target) || target < 1 || target > 7) return
+
+    setWeeklyTargets((previous) => ({
+      ...previous,
+      [programId]: target,
+    }))
+  }
 
   const weeklySessions = programs.reduce(
     (total, program) => total + program.sessionsThisWeek,
@@ -44,8 +61,16 @@ function ProfilePage() {
     0,
   )
 
+  const creditedSessions = programs.reduce(
+    (total, program) =>
+      total + Math.min(program.sessionsThisWeek, program.weeklyTarget),
+    0,
+  )
+
+  const remainingSessions = weeklyTarget - creditedSessions
+
   const weeklyProgress = weeklyTarget > 0
-    ? Math.min(Math.round((weeklySessions / weeklyTarget) * 100), 100)
+    ? Math.min(Math.round((creditedSessions / weeklyTarget) * 100), 100)
     : 0
 
   const filteredPrograms = programs.filter((program) => {
@@ -58,9 +83,12 @@ function ProfilePage() {
 
   return (
     <main className="profile-page">
-
       {/* Back Arrow to Home */}
-      <Link to="/home" className="home-nav-arrow left-arrow" aria-label="Go to Home">
+      <Link
+        to="/home"
+        className="home-nav-arrow left-arrow"
+        aria-label="Go to Home"
+      >
         ←
       </Link>
 
@@ -72,10 +100,10 @@ function ProfilePage() {
 
       <aside className="profile-preview" aria-label="Preview controls">
         <div>
-          <strong>Sprint 2 preview</strong>
+          <strong>Profile preview</strong>
           <p>
             {showDemo
-              ? 'Showing sample programs and activity, not saved user data.'
+              ? 'Sample activity. Goal changes reset when you leave or refresh this page.'
               : 'Showing how the page looks before activity is available.'}
           </p>
         </div>
@@ -122,31 +150,55 @@ function ProfilePage() {
       </section>
 
       <section className="profile-card" aria-labelledby="weekly-progress-title">
-        <div className="profile-section-heading">
-          <div>
+        <div className="profile-goal-overview">
+          <div
+            className="profile-goal-ring"
+            style={{ '--goal-progress': `${weeklyProgress}%` }}
+            aria-hidden="true"
+          >
+            <span>{weeklyTarget > 0 ? `${weeklyProgress}%` : '—'}</span>
+          </div>
+
+          <div className="profile-goal-content">
             <h2 id="weekly-progress-title">Weekly goal</h2>
             <p>
               {weeklyTarget > 0
-                ? `${weeklySessions} of ${weeklyTarget} planned sessions completed`
+                ? `${creditedSessions} of ${weeklyTarget} planned sessions completed`
                 : 'Your weekly goal will appear when you have a program.'}
             </p>
+
+            <progress
+              className="profile-progress"
+              value={weeklyProgress}
+              max="100"
+              aria-label="Weekly session goal completion"
+            />
+
+            <p className="profile-goal-message" aria-live="polite">
+              {weeklyTarget === 0
+                ? 'No activity to display yet.'
+                : remainingSessions === 0
+                  ? 'All weekly goals met!'
+                  : `${remainingSessions} planned ${
+                      remainingSessions === 1 ? 'session' : 'sessions'
+                    } left this week.`}
+            </p>
+
+            <p className="profile-progress-note">
+              Each program counts toward its own weekly target.
+            </p>
+
+            {showDemo && (
+              <button
+                type="button"
+                className="profile-reset-goals"
+                onClick={() => setWeeklyTargets({})}
+              >
+                Reset sample goals
+              </button>
+            )}
           </div>
-
-          {weeklyTarget > 0 && (
-            <span className="profile-percentage">{weeklyProgress}%</span>
-          )}
         </div>
-
-        <progress
-          className="profile-progress"
-          value={weeklyProgress}
-          max="100"
-          aria-label="Weekly session goal completion"
-        />
-
-        <p className="profile-progress-note">
-          Progress reflects completed sessions toward your weekly goal.
-        </p>
       </section>
 
       <section aria-labelledby="my-programs-title">
@@ -197,6 +249,25 @@ function ProfilePage() {
 
                   <h3 className="profile-program-name">{program.name}</h3>
                   <p>{program.focus}</p>
+
+                  <label className="profile-goal-control">
+                    Weekly target
+                    <select
+                      value={program.weeklyTarget}
+                      onChange={(event) =>
+                        updateWeeklyTarget(program.id, event.target.value)
+                      }
+                      aria-label={`${program.name} weekly session target`}
+                    >
+                      {Array.from({ length: 7 }, (_, index) => index + 1).map(
+                        (target) => (
+                          <option key={target} value={target}>
+                            {target} {target === 1 ? 'session' : 'sessions'}
+                          </option>
+                        ),
+                      )}
+                    </select>
+                  </label>
 
                   <div className="profile-program-progress">
                     <span>This week</span>
