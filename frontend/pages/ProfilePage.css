@@ -283,3 +283,182 @@
     align-items: flex-start;
   }
 }
+
+.profile-goal-overview {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  align-items: center;
+  gap: 28px;
+}
+
+.profile-goal-ring {
+  display: grid;
+  place-items: center;
+  width: 132px;
+  height: 132px;
+  padding: 12px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #6354dc var(--goal-progress),
+    #ececf6 var(--goal-progress)
+  );
+}
+
+.profile-goal-ring > span {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #fff;
+  color: #4338ca;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.profile-goal-content {
+  min-width: 0;
+}
+
+.profile-goal-message {
+  margin-bottom: 4px;
+  color: #4338ca;
+  font-weight: 700;
+}
+
+.profile-goal-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profile-goal-control select {
+  max-width: 100%;
+  padding: 9px 12px;
+  border: 1px solid #d8d8ea;
+  border-radius: 9px;
+  background: #f7f5ff;
+  color: #202442;
+  font: inherit;
+  cursor: pointer;
+}
+
+.profile-reset-goals {
+  margin-top: 14px;
+  padding: 9px 14px;
+  border: 1px solid #d8d2f4;
+  border-radius: 9px;
+  background: #eeebff;
+  color: #4338ca;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.profile-reset-goals:hover {
+  background: #e2dcff;
+}
+
+.profile-program-grid > .profile-card {
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+@media (hover: hover) {
+  .profile-program-grid > .profile-card:hover {
+    transform: translateY(-3px);
+    border-color: #b8a8ef;
+  }
+}
+
+@media (max-width: 650px) {
+  .profile-goal-overview {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .profile-goal-ring {
+    justify-self: center;
+  }
+
+  .profile-page > .home-nav-arrow {
+    position: static;
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    margin-bottom: 18px;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-program-grid > .profile-card,
+  .profile-program-grid > .profile-card:hover {
+    transition: none;
+    transform: none;
+  }
+}
+
+.profile-milestone-intro {
+  margin: 0 0 16px;
+  color: #d9ddf3;
+  font-size: 14px;
+}
+
+.profile-milestone-summary {
+  margin-bottom: 16px;
+}
+
+.profile-milestone-summary > strong {
+  color: #4338ca;
+}
+
+.profile-milestone-summary p {
+  margin: 8px 0 0;
+}
+
+.profile-exercises .profile-milestone-requirements {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.profile-milestone-requirements li {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e9e9f2;
+}
+
+.profile-milestone-requirements li:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.profile-milestone-requirements li > div {
+  min-width: 0;
+}
+
+.profile-milestone-requirements strong {
+  display: block;
+  color: #202442;
+  font-size: 14px;
+}
+
+.profile-milestone-requirements p {
+  margin: 4px 0 0;
+  font-size: 14px;
+}
+
+.profile-milestone-requirements .profile-badge {
+  flex-shrink: 0;
+}
