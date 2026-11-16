@@ -399,7 +399,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .profile-program-grid > .profile-card {
+  .profile-program-grid > .profile-card,
+  .profile-program-grid > .profile-card:hover {
     transition: none;
     transform: none;
   }
