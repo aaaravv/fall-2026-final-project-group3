@@ -14,15 +14,14 @@ const backendRoot = resolve(import.meta.dirname, '..');
 const projectRoot = resolve(backendRoot, '..');
 config({ path: resolve(projectRoot, '.env.local') });
 
-const requiredEnvironment = ['GOOGLE_CLIENT_ID', 'POSTGRES_PASSWORD'] as const;
-const missingEnvironment = requiredEnvironment.filter((key) => !process.env[key]);
-if (missingEnvironment.length > 0) {
-    throw new Error(
-        `Missing required environment variables in project-root .env.local: ${missingEnvironment.join(', ')}`
-    );
+if (!process.env.GOOGLE_CLIENT_ID) {
+    throw new Error('Missing required environment variable: GOOGLE_CLIENT_ID');
+}
+if (!process.env.DATABASE_URL && !process.env.POSTGRES_PASSWORD) {
+    throw new Error('Missing database connection settings: set DATABASE_URL or POSTGRES_PASSWORD');
 }
 
-const googleClientId = process.env.GOOGLE_CLIENT_ID!;
+const googleClientId = process.env.GOOGLE_CLIENT_ID;
 const frontendOrigin = process.env.FRONTEND_ORIGIN ?? 'http://localhost:5173';
 const port = Number(process.env.PORT ?? 3000);
 if (!Number.isInteger(port) || port < 1 || port > 65535) {
@@ -33,18 +32,28 @@ const isProduction = process.env.NODE_ENV === 'production';
 const sessionDurationSeconds = 7 * 24 * 60 * 60;
 const sessionCookieName = 'stretchmaster_session';
 const googleClient = new OAuth2Client(googleClientId);
-const pool = new Pool({
-    host: process.env.POSTGRES_HOST ?? '127.0.0.1',
-    port: Number(process.env.POSTGRES_PORT ?? 5432),
-    database: process.env.POSTGRES_DB ?? 'stretchmaster',
-    user: process.env.POSTGRES_USER ?? 'stretchmaster',
-    password: process.env.POSTGRES_PASSWORD
-});
+
+const pool = process.env.DATABASE_URL
+    ? new Pool({
+          connectionString: process.env.DATABASE_URL,
+          ssl: isProduction ? { rejectUnauthorized: false } : undefined
+      })
+    : new Pool({
+          host: process.env.POSTGRES_HOST ?? '127.0.0.1',
+          port: Number(process.env.POSTGRES_PORT ?? 5432),
+          database: process.env.POSTGRES_DB ?? 'stretchmaster',
+          user: process.env.POSTGRES_USER ?? 'stretchmaster',
+          password: process.env.POSTGRES_PASSWORD
+      });
+
 const db = new Kysely<Database>({
     dialect: new PostgresDialect({ pool })
 });
 
 const app = express();
+if (isProduction) {
+    app.set('trust proxy', 1);
+}
 app.use(cors({ origin: frontendOrigin, credentials: true }));
 app.use(express.json({ limit: '10kb' }));
 app.use('/api/progress', progressRouter);   // for pogressHandler.ts

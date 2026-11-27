@@ -10,18 +10,24 @@ const backendRoot = resolve(import.meta.dirname, '..');
 const projectRoot = resolve(backendRoot, '..');
 config({ path: resolve(projectRoot, '.env.local') });
 
-const password = process.env.POSTGRES_PASSWORD;
-if (!password) {
-    throw new Error('POSTGRES_PASSWORD is missing. Set it in the project root .env.local file.');
+const isProduction = process.env.NODE_ENV === 'production';
+
+if (!process.env.DATABASE_URL && !process.env.POSTGRES_PASSWORD) {
+    throw new Error('Missing database connection settings: set DATABASE_URL or POSTGRES_PASSWORD in environment.');
 }
 
-const pool = new Pool({
-    host: process.env.POSTGRES_HOST ?? '127.0.0.1',
-    port: Number(process.env.POSTGRES_PORT ?? 5432),
-    database: process.env.POSTGRES_DB ?? 'stretchmaster',
-    user: process.env.POSTGRES_USER ?? 'stretchmaster',
-    password
-});
+const pool = process.env.DATABASE_URL
+    ? new Pool({
+          connectionString: process.env.DATABASE_URL,
+          ssl: isProduction ? { rejectUnauthorized: false } : undefined
+      })
+    : new Pool({
+          host: process.env.POSTGRES_HOST ?? '127.0.0.1',
+          port: Number(process.env.POSTGRES_PORT ?? 5432),
+          database: process.env.POSTGRES_DB ?? 'stretchmaster',
+          user: process.env.POSTGRES_USER ?? 'stretchmaster',
+          password: process.env.POSTGRES_PASSWORD
+      });
 
 const db = new Kysely<Database>({
     dialect: new PostgresDialect({ pool })
